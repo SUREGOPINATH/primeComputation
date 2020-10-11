@@ -7,6 +7,7 @@ function intialise() {
         index=0
         prime=2
         declare -a primeArray
+	declare -a primePallindromeArray
 	declare -a primeArray2
 }
 
@@ -23,6 +24,25 @@ function checkPrime() {
                 fi
         done
         echo $flag
+}
+
+function pallindromeChecker() {
+
+        temp=$1
+        while (( $temp!=0 ))
+        do
+                remainder=$(($temp%10))
+                reversedNumber=$((reversedNumber*10 +remainder))
+                temp=$(($temp/10))
+        done
+	if [ $1 -eq $reversedNumber ]
+	then
+	        echo 0
+	else
+        	echo 1
+	fi
+
+
 }
 
 function printArray() {
@@ -93,6 +113,24 @@ function firstHundredWithUnitPlace() {
 	done
 }
 
+function pallindromePrime() {
+
+	while [ $prime -lt 200 ]
+        do
+                primeNumber=$( checkPrime $prime )
+                if [ $primeNumber -eq 0 ]
+                then
+			if [ $(pallindromeChecker $prime) -eq 0 ]
+			then
+	                        primePallindromeArray[$index]=$prime
+        	                index=$(($index+1))
+			fi
+                fi
+                prime=$(($prime+1))
+        done
+	echo ${primePallindromeArray[@]}
+
+}
 function primeComputation() {
 
         intialise;
@@ -101,6 +139,8 @@ function primeComputation() {
         firstFiftyAlterPrime;
 	intialise;
         firstHundredWithUnitPlace;
+	intialise;
+	pallindromePrime;
 }
 
 primeComputation;
