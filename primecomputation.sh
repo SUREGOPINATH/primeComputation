@@ -47,7 +47,6 @@ function pallindromeChecker() {
 
 function printArray() {
 
-        echo "first 100 prime number are : "
    for (( counter=$(($index-1)); counter>=0; counter-- ))
    do
       echo ${primeArray[$counter]}
@@ -78,6 +77,7 @@ function firstHundredPrime() {
 		fi
 		prime=$(($prime+1))
         done
+	echo "first 100 prime number are : "
         printArray
 }
 
@@ -94,7 +94,7 @@ function firstFiftyAlterPrime() {
                 fi
 		prime=$(($prime+1))
         done
-        echo ${primeArray2[@]}
+        echo "first 50 alter prime number are : "
         printAlterArray;
 
 }
@@ -128,8 +128,24 @@ function pallindromePrime() {
                 fi
                 prime=$(($prime+1))
         done
+	echo "prime pallindrome from 1 to 200 are : "
 	echo ${primePallindromeArray[@]}
 
+}
+
+function rangeOfPrimeNumber() {
+
+	for (( counter=700; counter<900; counter++ ))
+	do
+		primeNumber=$( checkPrime $counter )
+		if [ $primeNumber -eq 0 ]
+		then
+			primeArray[$index]=$counter
+			index=$(($index+1))
+		fi
+	done
+	echo "prime numbers from 700 to 900 : "
+	printArray;
 }
 function primeComputation() {
 
@@ -141,6 +157,9 @@ function primeComputation() {
         firstHundredWithUnitPlace;
 	intialise;
 	pallindromePrime;
+	intialise;
+	rangeOfPrimeNumber;
 }
 
 primeComputation;
+
