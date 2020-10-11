@@ -7,7 +7,7 @@ function intialise() {
         index=0
         prime=2
         declare -a primeArray
-
+	declare -a primeArray2
 }
 
 function checkPrime() {
@@ -35,6 +35,16 @@ function printArray() {
 
 }
 
+function printAlterArray() {
+
+        echo "first 50 alter prime number are : "
+        for (( counter=$(($index-1)); counter>=0; counter-- ))
+        do
+                echo ${primeArray2[$counter]}
+                counter=$(($counter-1))
+        done
+}
+
 function firstHundredPrime() {
 
         while [ $count -lt 100 ]
@@ -53,12 +63,32 @@ function firstHundredPrime() {
         printArray
 }
 
+function firstFiftyAlterPrime() {
+
+        while [ $count -lt 50 ]
+        do
+                primeNumber=$( checkPrime $prime )
+                if [ $primeNumber -eq 0 ]
+                then
+                        primeArray2[$index]=$prime
+                        index=$(($index+1))
+                        prime=$(($prime+1))
+			count=$(($count+1))
+                else
+                        prime=$(($prime+1))
+                fi
+        done
+        echo ${primeArray2[@]}
+        printAlterArray;
+
+}
+
 function primeComputation() {
 
         intialise;
 	firstHundredPrime;
-
-        ##firstFiftyAlterPrime;
+	intialise;
+        firstFiftyAlterPrime;
 ##      firstHundredWithUnitPlace;
 }
 
