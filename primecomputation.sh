@@ -54,11 +54,9 @@ function firstHundredPrime() {
 		then
 	                primeArray[$index]=$prime
 			index=$(($index+1))
-        	        prime=$(($prime+1))
 			count=$(($count+1))
-		else
-			prime=$(($prime+1))
 		fi
+		prime=$(($prime+1))
         done
         printArray
 }
@@ -72,15 +70,27 @@ function firstFiftyAlterPrime() {
                 then
                         primeArray2[$index]=$prime
                         index=$(($index+1))
-                        prime=$(($prime+1))
 			count=$(($count+1))
-                else
-                        prime=$(($prime+1))
                 fi
+		prime=$(($prime+1))
         done
         echo ${primeArray2[@]}
         printAlterArray;
 
+}
+
+function firstHundredWithUnitPlace() {
+
+
+        echo "first hundred prime numbers with 1 in unit place"
+
+	for (( counter=0; counter<${#primeArray[@]} ;counter++ ))
+        do
+                        if [ $((${primeArray[$counter]}%10)) -eq 1 ]
+                        then
+                                echo ${primeArray[$counter]}
+                        fi
+	done
 }
 
 function primeComputation() {
@@ -89,7 +99,8 @@ function primeComputation() {
 	firstHundredPrime;
 	intialise;
         firstFiftyAlterPrime;
-##      firstHundredWithUnitPlace;
+	intialise;
+        firstHundredWithUnitPlace;
 }
 
 primeComputation;
